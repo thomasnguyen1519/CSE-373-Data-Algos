@@ -4,7 +4,7 @@
 // 1/20/17
 // Homework #2
 
-/* 
+/*
  * ThreeHeap is a data structure that stores doubles in a ternary heap
  * that dynamically resizes to necessitate storage needs. Duplicates of
  * data are allowed in ThreeHeap.
@@ -19,12 +19,12 @@ public class ThreeHeap implements PriorityQueue {
 
 	private double[] heap;
 	private int size;
-	
+
 	// Initializes an empty heap.
 	public ThreeHeap() {
 		this.heap = new double[10];
 	}
-	
+
 	// Returns true if the heap is empty, otherwise false.
 	public boolean isEmpty() {
 		return this.size == 0;
@@ -35,7 +35,7 @@ public class ThreeHeap implements PriorityQueue {
 		return this.size;
 	}
 
-	/* 
+	/*
 	 * Returns the minimum double that is stored in the heap.
 	 * Throws EmptyHeapException error, if called on an empty heap.
 	 */
@@ -45,7 +45,7 @@ public class ThreeHeap implements PriorityQueue {
 		}
 		return this.heap[1];
 	}
-	
+
 	// Inserts the double param to the heap and resizes the storage, if necessary.
 	public void insert(double x) {
 		heap[percolateUp(++size, x)] = x;
@@ -54,7 +54,7 @@ public class ThreeHeap implements PriorityQueue {
 		}
 	}
 
-	/* 
+	/*
 	 * Removes and returns the minimum double from the heap, while maintaining
 	 * the heap structure.
 	 * Throws an EmptyHeapException error, if called on an empty heap.
@@ -66,24 +66,26 @@ public class ThreeHeap implements PriorityQueue {
 		size--;
 		return value;
 	}
-	
+
 	/*
 	 *  Pseudo-resets the heap so that it appears to be empty and overwrites
 	 *  it with a new heap of the values from the List param.
 	 */
 	public void buildQueue(List<Double> list) {
-		makeEmpty();
-		for (double data : list) {
-			heap[++size] = data;
+		if (list != null) {
+			makeEmpty();
+			for (double data : list) {
+				heap[++size] = data;
+			}
+			fixHeapOrder();
 		}
-		fixHeapOrder();
 	}
-	
+
 	// Pseudo-resets the heap so that it appears to be empty.
 	public void makeEmpty() {
 		this.size = 0;
 	}
-	
+
 	// Returns a string representation of the heap.
 	public String toString() {
 		String output = "[-";
@@ -95,8 +97,8 @@ public class ThreeHeap implements PriorityQueue {
 		}
 		return output + "]";
 	}
-	
-	/* 
+
+	/*
 	 * Returns the index of where the double param should be placed within the
 	 * heap using an upward traversal starting from the index of the int param.
 	 */
@@ -107,8 +109,8 @@ public class ThreeHeap implements PriorityQueue {
 		}
 		return position;
 	}
-	
-	/* 
+
+	/*
 	 * Returns the index of where the double param should be placed within
 	 * the heap using a downward traversal starting from the index of the
 	 * int param.
@@ -120,7 +122,7 @@ public class ThreeHeap implements PriorityQueue {
 			int left = middle - 1;
 			int target = 1;
 			if (middle > size || (heap[left] <= heap[right]
-				 && heap[left] <= heap[middle])) { 
+				 && heap[left] <= heap[middle])) {
 				target = left;
 			} else if (heap[middle] <= heap[right] || right > size) {
 				target = middle;
@@ -136,10 +138,10 @@ public class ThreeHeap implements PriorityQueue {
 		}
 		return position;
 	}
-	
+
 	/*
 	 *  Adjusts the heap's structure with Floyd's method to maintain the heap
-	 *  order property, if necessary. 
+	 *  order property, if necessary.
 	 */
 	private void fixHeapOrder() {
 		for (int i = (size + 1) / 3; i > 0; i--) {
