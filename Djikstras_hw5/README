@@ -1,0 +1,257 @@
+Tom Nguyen
+3/2/17
+CSE 373
+TA: Raquel Van Hofwegen
+HW #5
+
+
+1) *Was not sure how to show work using "in degree of 0 queue" so I just made a table of each step.*
+
+   Vertex:     A  B  C  D  E  F  G
+   Removed?	   n  n  n  n  n  n  n
+   In-degree:  0  1  1  2  2  1  0
+   In-degree queue: A,G
+
+   Vertex:     A  B  C  D  E  F  G
+   Removed?	   y  n  n  n  n  n  n
+   In-degree:  0  0  1  1  2  1  0
+   In-degree queue: A,G,B
+
+   Vertex:     A  B  C  D  E  F  G
+   Removed?	   y  y  n  n  n  n  n
+   In-degree:  0  0  1  0  1  1  0
+   In-degree queue: A,G,B,D
+
+   Vertex:     A  B  C  D  E  F  G
+   Removed?	   y  y  n  y  n  n  n
+   In-degree:  0  0  1  0  0  1  0
+   In-degree queue: A,G,B,D,E
+
+   Vertex:     A  B  C  D  E  F  G
+   Removed?	   y  y  n  y  y  n  n
+   In-degree:  0  0  0  0  0  1  0
+   In-degree queue: A,G,B,D,E,C
+
+   Vertex:     A  B  C  D  E  F  G
+   Removed?	   y  y  y  y  y  n  n
+   In-degree:  0  0  0  0  0  1  0
+   In-degree queue: A,G,B,D,E,C
+
+   Vertex:     A  B  C  D  E  F  G
+   Removed?	   y  y  y  y  y  n  y
+   In-degree:  0  0  0  0  0  0  0
+   In-degree queue: A,G,B,D,E,C,F
+
+   Vertex:     A  B  C  D  E  F  G
+   Removed?	   y  y  y  y  y  y  y
+   In-degree:  0  0  0  0  0  0  0
+   In-degree queue: A,G,B,D,E,C,F
+
+2) 	
+	a) Work shown step by step (order priority is labelled next to each edge; unprocessed nodes do not have anything next to them; 'X' means that it has been processed but ignored)
+
+	   Edges in sorted order:
+	   1: (B,E), (C,G), (D,G)
+	   2: (A,B), (D,C), (E,F) 
+	   3: (A,E), (B,F), (E,G)
+	   4: (A,D), (F,G)
+
+	   Edges in sorted order:
+	   1: (B,E) 1, (C,G), (D,G)
+	   2: (A,B), (D,C), (E,F) 
+	   3: (A,E), (B,F), (E,G)
+	   4: (A,D), (F,G)
+
+	   Edges in sorted order:
+	   1: (B,E) 1, (C,G) 2, (D,G)
+	   2: (A,B), (D,C), (E,F) 
+	   3: (A,E), (B,F), (E,G)
+	   4: (A,D), (F,G)
+
+	   Edges in sorted order:
+	   1: (B,E) 1, (C,G) 2, (D,G) 3
+	   2: (A,B), (D,C), (E,F)
+	   3: (A,E), (B,F), (E,G)
+	   4: (A,D), (F,G)
+
+	   Edges in sorted order:
+	   1: (B,E) 1, (C,G) 2, (D,G) 3
+	   2: (A,B) 4, (D,C), (E,F)
+	   3: (A,E), (B,F), (E,G)
+	   4: (A,D), (F,G)
+
+	   Edges in sorted order:
+	   1: (B,E) 1, (C,G) 2, (D,G) 3
+	   2: (A,B) 4, (D,C) X, (E,F)
+	   3: (A,E), (B,F), (E,G)
+	   4: (A,D), (F,G)
+
+	   Edges in sorted order:
+	   1: (B,E) 1, (C,G) 2, (D,G) 3
+	   2: (A,B) 4, (D,C) X, (E,F) 5
+	   3: (A,E), (B,F), (E,G)
+	   4: (A,D), (F,G)
+
+	   Edges in sorted order:
+	   1: (B,E) 1, (C,G) 2, (D,G) 3
+	   2: (A,B) 4, (D,C) X, (E,F) 5
+	   3: (A,E) X, (B,F), (E,G)
+	   4: (A,D), (F,G)
+
+	   Edges in sorted order:
+	   1: (B,E) 1, (C,G) 2, (D,G) 3
+	   2: (A,B) 4, (D,C) X, (E,F) 5
+	   3: (A,E) X, (B,F) X, (E,G)
+	   4: (A,D), (F,G)
+
+	   Edges in sorted order (final answer):
+	   1: (B,E) 1, (C,G) 2, (D,G) 3
+	   2: (A,B) 4, (D,C) X, (E,F) 5
+	   3: (A,E) X, (B,F) X, (E,G) 6
+	   4: (A,D), (F,G)
+
+	   Final cost of 10.
+	   
+	b) | Vertex | Known | Cost | Prev | Order |
+	   |   A    |   n   |   ∞  |      |       |
+	   |   B    |   n   |   ∞  |      |       |
+	   |   C    |   n   |   ∞  |      |       |
+	   |   D    |   n   |   ∞  |      |       |
+	   |   E    |   n   |   ∞  |      |       |
+	   |   F    |   n   |   ∞  |      |       |
+	   |   G    |   n   |   ∞  |      |       |
+
+	   | Vertex | Known | Cost | Prev | Order |
+	   |   A    |   y   |   0  |   \  |   1   |
+	   |   B    |   n   |   2  |   A  |       |
+	   |   C    |   n   |   ∞  |      |       |
+	   |   D    |   n   |   4  |   A  |       |
+	   |   E    |   n   |   3  |   A  |       |
+	   |   F    |   n   |   ∞  |      |       |
+	   |   G    |   n   |   ∞  |      |       |
+
+	   | Vertex | Known | Cost | Prev | Order |
+	   |   A    |   y   |   0  |   \  |   1   |
+	   |   B    |   y   |   2  |   A  |   2   |
+	   |   C    |   n   |   ∞  |      |       |
+	   |   D    |   n   |   4  |   A  |       |
+	   |   E    |   n   |   1  |   B  |       |
+	   |   F    |   n   |   3  |   B  |       |
+	   |   G    |   n   |   ∞  |      |       |
+
+	   | Vertex | Known | Cost | Prev | Order |
+	   |   A    |   y   |   0  |   \  |   1   |
+	   |   B    |   y   |   2  |   A  |   2   |
+	   |   C    |   n   |   ∞  |      |       |
+	   |   D    |   n   |   4  |   A  |       |
+	   |   E    |   y   |   1  |   B  |   3   |
+	   |   F    |   n   |   2  |   E  |       |
+	   |   G    |   n   |   3  |   E  |       |
+
+	   | Vertex | Known | Cost | Prev | Order |
+	   |   A    |   y   |   0  |   \  |   1   |
+	   |   B    |   y   |   2  |   A  |   2   |
+	   |   C    |   n   |   ∞  |      |       |
+	   |   D    |   n   |   4  |   A  |       |
+	   |   E    |   y   |   1  |   B  |   3   |
+	   |   F    |   y   |   2  |   E  |   4   |
+	   |   G    |   n   |   3  |   E  |       |
+
+	   | Vertex | Known | Cost | Prev | Order |
+	   |   A    |   y   |   0  |   \  |   1   |
+	   |   B    |   y   |   2  |   A  |   2   |
+	   |   C    |   n   |   1  |   G  |       |
+	   |   D    |   n   |   1  |   A  |       |
+	   |   E    |   y   |   1  |   B  |   3   |
+	   |   F    |   y   |   2  |   E  |   4   |
+	   |   G    |   y   |   3  |   E  |   5   |
+
+	   | Vertex | Known | Cost | Prev | Order |
+	   |   A    |   y   |   0  |   \  |   1   |
+	   |   B    |   y   |   2  |   A  |   2   |
+	   |   C    |   y   |   1  |   G  |   6   |
+	   |   D    |   n   |   1  |   G  |       |
+	   |   E    |   y   |   1  |   B  |   3   |
+	   |   F    |   y   |   2  |   E  |   4   |
+	   |   G    |   y   |   3  |   E  |   5   |
+
+	   | Vertex | Known | Cost | Prev | Order |
+	   |   A    |   y   |   0  |   \  |   1   |
+	   |   B    |   y   |   2  |   A  |   2   |
+	   |   C    |   y   |   1  |   G  |   6   |
+	   |   D    |   y   |   1  |   G  |   7   |
+	   |   E    |   y   |   1  |   B  |   3   |
+	   |   F    |   y   |   2  |   E  |   4   |
+	   |   G    |   y   |   3  |   E  |   5   |
+
+	   Use last table to find the MST by considering (Vertex, Prev) as an edge. Add the Cost column to find the total cost of the MST.
+
+	   Edges: (A,B), (C,G), (D,G), (E,B), (F,E), (G,E) with a cost of 10.
+
+3) 
+	a) public Map<Vertex, Set<Vertex>> reverse(Map<Vertex, Set<Vertex>> graph) {
+		check if graph is null {
+			throw an Exception Error;
+		}
+		make a new Map<Vertex, Set<Vertex>> called reverseGraph;
+		for each Vertex v in graph {
+			for each Vertex w in graph.get(v) {
+				reverseGraph.put(w,v);
+			}
+		} 
+		make a new Map<Vertex, Set<Vertex>> called copyOfReverseGraph;
+		for each Vertex a in reverseGraph.keySet() {
+			make a new Set<Vertex> called setCopy;
+			Set<Vertex> copyMe = reverseGraph.get(a)
+			for each Vertex b in copyMe {
+				setCopy.add(new Vertex(data from b));
+			}
+			copyOfReverseGraph.put(new Vertex(data from a), setCopy);
+		}
+		return copyOfReverseGraph;
+	}
+
+	b) public Set<Vertex> nextAdjacentVertices(Map<Vertex, Set<Vertex>> graph, Vertex source) {
+		check if graph is null and if the graph doesnt containsKey(source) {
+			throw an Exception Error;
+		}
+		make a new Set<Vertex> called adjacentToAdajacentVertices;
+		Set<Vertex> adjacentVertices = graph.get(source);
+		for each Vertex v in adjacentVertices {
+			adjacentToAdjacentVertices.addAll(graph.get(v));
+		}
+		make a new Set<Vertex> called copyOfAdjacentToAdajacentVertices;
+		for each Vertex v in adjacentToAdjacentVertices {
+			copyOfAdjacentToAdajacentVertices.add(new Vertex(data from v));
+		}
+		return copyOfAdjacentToAdjacentVertices;
+	}
+
+	c) 	reverse = O(|V| + |E|) because you will have to iterate over all the Vertices in the graph param and for each of those vertices you will have to look at all of its edges (the first nested for loop) and reverse their vertex to vertex association. In the end, you will have to iterate over all the vertices and edges. This creates an O(|V| + |E|) asymptotic runtime of the function. The deep copying, if necessary, will also be an O(|V| + |E|) runtime for the operation because you have to copy all of the vertices and edge vertices in the graph. 
+
+		nextAdjacentVertices = O(|V| + |E|) because when you are calling the containsKey method on the Map, assuming it is a HashMap, then it will need to possibly iterate over all the keys that were hashed assuming the worst case of a bad hash function that bucketed all them into one spot and chained them all. Then the worst case of the edges would be that the edges were all on the one vertex or all the edges are adjacent to the vertices that source is adjacent to. So add these together to get a process of O(|V| + |E|). You add them together because you cannot assume that |V| > |E| or vice versa because they are not fully dependent on each other, but they are related. Then the deep copying, if necessary, is O(|V| + |E|) as well because it is just copying all the vertices and edge vertices in the graph.
+
+4) 
+	a) Dijkstra's algorithm will NOT use the fewest edges condition as a tiebreaker for multiple lowest cost paths between two vertices because it only considers the cost of paths and has no inherent data structure that keeps track of the number of edges taken in the shortest cost path. One way to implement this as a tiebreaker for the least cost path, is to compare the length/size of the List<Vertex> field of each Path and return the Path that had the smaller length/size.
+
+	b) Vertices: A, B, C
+	   Edges (from, to, cost): (A,C,10), (A,B,11), (B,C,-10)
+	   Objective: Go from A to C using Dijkstra's algorithm.
+	   Error Explanation: Since (A,C,10) is going from A to C and is less than the cost of (A,B,11), then Dijkstra's algorithm will not even consider the path A->B->C because Dijkstra's algorithm indirectly assumes that each edge has a positive cost so that means if edge #1 from a vertex costs less and takes you directly to the destination than edge #2 from the same vertex and there is at least one more vertex to the destination then there is logically and mathematically no way for a path #2 through edge #2 to be less than the path #1 through edge #1 because you will be adding a positive number to the cost of path #2, further increasing the cost.
+
+	c) Example: 
+
+	   Vertices: A, B, C
+	   Edges (from, to, cost): (A,C,-2), (A,B,-1), (B,C,-2)
+	   Objective: Go from A to C using Dijkstra's algorithm.
+	   Error Explanation: In this case, k = 2 and Dijkstra's algorithm will go thru the edge (A,C,-2) instead of (A,B,-1), (B,C,-2) because the (A,C,-2) path will cost 0 and then the (A,B,-1), (B,C,-2) path will cost 1 because of the added k constant to every edge. 
+	   General Explanation: If all the edges were negatives and two edges (on separate paths to a certain vertex) have the same negative cost that also turns out to be the largest cost then those edges will become costs of 0, but the other edges will be postive costs. In general, Dijkstra's will not work in this scenario because if all the edge costs were negatives then the lowest costing path will be the path that is the most negative costing path before you add +k, but there are certain cases where the lowest costing path after you add +k to all the edge costs will be the more positive costing path. In these cases, because Dijkstra's algorithm looks for the least positive costing path, then it will fail to find the most positive costing path that was actually the least costing path before the addition of +k.
+
+5) 
+	a) To test my shortestPath method, I ran test code on possible non-adversarial cases that I could think of which were no path to the two vertices, a path to the vertices, and the same vertex. I also tested to see if my graph could find the shortest path when there was a path but not all the vertices were connected to each other. On top of this, I tested my edge cases to make sure that they were throwing the exception errors when needed. Also, I tried to make sure that the preservation of abstraction was in order by trying to edit references and seeing if those changes were reflective in the MyGraph object.
+
+	b) N/A
+
+
+
+
